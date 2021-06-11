@@ -19,3 +19,4 @@ class houseItem(scrapy.Item):
     tags = scrapy.Field()
     avg_price = scrapy.Field()
     telephone = scrapy.Field()
+    coordinates = scrapy.Field()

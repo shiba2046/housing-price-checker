@@ -11,7 +11,8 @@ BOT_NAME = 'xiaopangSpider'
 
 SPIDER_MODULES = ['xiaopangSpider.spiders']
 NEWSPIDER_MODULE = 'xiaopangSpider.spiders'
-FEED_EXPORT_ENCODING='UTF-8'
+# FEED_EXPORT_ENCODING='UTF-8'
+FEED_EXPORT_ENCODING='gb18030'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
