@@ -27,11 +27,17 @@ class XplistSpider(scrapy.Spider):
             item['url'] = info.xpath("h3/a/@href").extract()[0].strip()
             item['listType'] = info.xpath("h3/i/text()").extract()[0].strip()
 
+            # Remove extra spaces
             item['area'] = re.sub(r'[\W\[\]]', '', info.xpath("p[1]/text()").extract()[0])
             item['address'] = info.xpath("p[1]/span/text()").extract()[0].strip()
             item['mapLink'] = info.xpath("p[1]/a/@href").extract()[0].strip()
             mapParts = parse_qs(urlparse(item['mapLink']).fragment)
             item['coordinates']=f"{mapParts['lng'][0]},{mapParts['lat'][0]}"
+            
+            #p[2]/a
+            developer = info.xpath("p[2]/a//text()").extract_first()
+            if developer:
+                item['developer'] = developer.strip()
             
             item['tags'] = info.xpath("p[@class='tags']/span/text()").extract()
             
@@ -45,7 +51,7 @@ class XplistSpider(scrapy.Spider):
         for atag in response.xpath("//a[@class='p_redirect']"):
             url = atag.xpath("@href").extract()[0]
             text = atag.xpath("text()").extract()[0]
-            # if text == '>>':
-            #     # next_url = url
-            #     yield scrapy.Request(url, self.parse)
+            # 如果需要抓所有页面，uncomment 下面两行
+            if text == '>>':
+                yield scrapy.Request(url, self.parse)
         
