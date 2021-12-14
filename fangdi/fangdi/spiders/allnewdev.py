@@ -101,7 +101,7 @@ class SplashPostHouseList(scrapy.Spider):
                 'wait': 1,
                 'headers': {
                     'contentType': 'application/x-www-form-urlencoded;charset=utf-8',
-                    'referer'
+                    'referer': 'http://www.fangdi.com.cn'
                 },
                 'lua_source': self.lua_script, 
                 'http_method': 'POST', 
